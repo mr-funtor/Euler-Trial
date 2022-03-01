@@ -1,7 +1,7 @@
 let maxProduct=0;
 
 function largestGridProduct(allArrays) {
-	let adjacentLength=4;
+		let adjacentLength=4;
 	
 	
 	
@@ -19,19 +19,25 @@ function largestGridProduct(allArrays) {
 			//down
 			const downAdjacent=[
 			allArrays[i][j], 
-			allArrays[i+1][j] !== undefined ? matrix[i+1][j]:1,
-			allArrays[i+2][j] !== undefined ? matrix[i+2][j]:1,
-			allArrays[i+3][j] !== undefined ? matrix[i+3][j]:1
+			allArrays[i+1] !== undefined ? allArrays[i+1][j]:1,
+			allArrays[i+2] !== undefined ? allArrays[i+2][j]:1,
+			allArrays[i+3] !== undefined ? allArrays[i+3][j]:1
 			];
 			
 			calcMaxProduct(downAdjacent)
 			
 			//diagonal 1
 			const diagonalAdjacent1=[
-			allArrays[i][j], 
-			allArrays[i+1][j] !== undefined ? matrix[i+1][j]:1,
-			allArrays[i+2][j] !== undefined ? matrix[i+2][j]:1,
-			allArrays[i+3][j] !== undefined ? matrix[i+3][j]:1
+				allArrays[i][j], 
+				allArrays[i+1] !== undefined 
+					? allArrays[i+1][j+1] !== undefined
+						? allArrays [i+1][j+1]:1:1  ,
+				allArrays[i+2] !== undefined 
+					? allArrays[i+2][j+2] !== undefined
+						? allArrays [i+2][j+2]:1:1 ,
+				allArrays[i+3] !== undefined 
+					? allArrays[i+3][j+3] !== undefined
+						? allArrays [i+3][j+3]:1:1
 			];
 			
 			calcMaxProduct(diagonalAdjacent1)
@@ -39,9 +45,15 @@ function largestGridProduct(allArrays) {
 			//diagonal 2
 			const diagonalAdjacent2=[
 			allArrays[i][j], 
-			allArrays[i+1][j] !== undefined ? matrix[i+1][j]:1,
-			allArrays[i+2][j] !== undefined ? matrix[i+2][j]:1,
-			allArrays[i+3][j] !== undefined ? matrix[i+3][j]:1
+				allArrays[i+1] !== undefined 
+					? allArrays[i+1][j-1] !== undefined
+						? allArrays [i+1][j-1]:1:1  ,
+				allArrays[i+2] !== undefined 
+					? allArrays[i+2][j-2] !== undefined
+						? allArrays [i+2][j-2]:1:1 ,
+				allArrays[i+3] !== undefined 
+					? allArrays[i+3][j-3] !== undefined
+						? allArrays [i+3][j-3]:1:1
 			];
 			
 			calcMaxProduct(diagonalAdjacent2)
@@ -51,13 +63,16 @@ function largestGridProduct(allArrays) {
 	}
 	
 	
-	function calcMaxProduct(newArr){
-		const product= newArr.reduce((sum,number)=> *=number,1);
-		if(rightProduct>maxProduct){
+	
+	
+	
+  return maxProduct;
+}
+
+
+function calcMaxProduct(newArr){
+		const product= newArr.reduce((sum,number)=> sum*=number,1);
+		if(product>maxProduct){
 				maxProduct=product;
 			}
 	}
-	
-	
-  return true;
-}
