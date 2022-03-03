@@ -3,10 +3,12 @@ function specialPythagoreanTriplet(n) {
 		for(let b=a+1; b<=(n/2)-1;b++){
 			const c=n-b-a;
 			if(findTripleSum(a,b,c) && (a+b+c===n)){
+				console.log(a*b*c)
 				return a*b*c;
 			}
 		}
 	}
+	
 }
 
 
